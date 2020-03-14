@@ -6,6 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import axios from "axios";
 
 import Button from "@material-ui/core/Button";
 import MuiLink from "@material-ui/core/Link";
@@ -31,6 +32,24 @@ function VideoPreviewCard() {
 
   const onSubmit = e => {
     setLoading(true);
+    const formData = new FormData();
+    formData.append("video", videoFileObject);
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data"
+      }
+    };
+    axios
+      .post("http://localhost:3000/upload", formData, config)
+      .then(response => {
+        alert(
+          "The file is successfully uploaded.\nYou will receive an email with a link to download the 4k file"
+        );
+        setVideoFileObject("");
+        setVideoFileURL("");
+        setLoading(false);
+      })
+      .catch(error => {});
   };
 
   const onUpload = e => {
@@ -48,7 +67,7 @@ function VideoPreviewCard() {
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {videoFileObject.name.toUpperCase()}
+            {videoFileObject?.name?.toUpperCase()}
           </Typography>
           <Typography
             variant="body2"

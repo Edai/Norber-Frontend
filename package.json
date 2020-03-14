@@ -1,9 +1,10 @@
 {
-  "name": "nextjs",
+  "name": "norber",
   "version": "4.0.0",
   "private": true,
   "dependencies": {
     "@material-ui/core": "latest",
+    "axios": "^0.19.2",
     "clsx": "latest",
     "next": "latest",
     "prop-types": "latest",
@@ -12,7 +13,7 @@
     "video-react": "^0.14.1"
   },
   "scripts": {
-    "dev": "next",
+    "dev": "next -p 8080",
     "build": "next build",
     "start": "next start",
     "post-update": "echo \"codesandbox preview only, need an update\" && yarn upgrade --latest"
